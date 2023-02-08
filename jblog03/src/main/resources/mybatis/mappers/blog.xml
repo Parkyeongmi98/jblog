@@ -2,42 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="blog">
-	<insert id="insert" parameterType="blogvo">
+	<update id="update" parameterType="blogvo">
 		<![CDATA[
-		insert 
-			into user 
-			values(#{id }, #{name }, password(#{password }), now())
+		update blog
+			set title = #{title }, 
+				profile = #{profile }
 		]]>
-	</insert>
-	
-	<!-- 
-	<update id="update" parameterType="uservo">
-		<choose>
-			<when test='password == ""'>
-				<![CDATA[
-				update user 
-					set name = #{name }, gender = #{gender } 
-					where no = #{no }
-				]]>
-			</when>
-			<otherwise>
-				<![CDATA[
-				update user 
-					set name = #{name }, password = password(#{password }), gender = #{gender } 
-					where no = #{no }
-				]]>
-			</otherwise>
-		</choose>
 	</update>
 	
-	-->
-
-	<select id="findAdminBasic" resultType="blogvo" parameterType="map">
+	<select id="find" resultType="blogvo">
 		<![CDATA[
-		select id, name
-			from user 
-			where id = #{id } 
-			and password = password(#{password })
+		select title, profile
+			from blog
+			limit 0, 1
 		]]>
 	</select>
 </mapper>

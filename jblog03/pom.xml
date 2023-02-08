@@ -24,6 +24,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
+			<!-- JCL 제외 -->
+			<exclusions>
+			   <exclusion>
+				  <groupId>org.springframework</groupId>
+				  <artifactId>spring-jcl</artifactId>
+			   </exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- File Upload -->
@@ -77,6 +84,25 @@
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>3.0.8</version>
+		</dependency>
+		
+		<!-- validation -->
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.2.3.Final</version>
+		</dependency>
+		
+		<!-- Logback --> 
+		<dependency>                                    
+			<groupId>org.slf4j</groupId>                
+			<artifactId>jcl-over-slf4j</artifactId>     
+			<version>${jcloverslf4j.version}</version>  
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 		
 		<!-- JSTL -->
