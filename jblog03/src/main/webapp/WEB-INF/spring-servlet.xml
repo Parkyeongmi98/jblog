@@ -17,6 +17,19 @@
 	<!-- validator, conversionService, messageConverter, argumentResolver를 자동으로 등록 -->
 	<mvc:annotation-driven />
 	
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.douzone.jblog.security.LoginInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.douzone.jblog.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- Default Servlet Handler -->
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler/>
