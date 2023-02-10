@@ -38,24 +38,26 @@ public class BlogController {
 	private ServletContext servletContext;
 		
 	
-	@RequestMapping({"", "/{category}", "/{category}/{post}"})
+	@RequestMapping({"", "/{categoryNo}", "/{categoryNo}/{postNo}"})
 	public String blog(
 			@PathVariable("id")String id,
-			@PathVariable("category")Optional<Long> categoryNo,
-			@PathVariable("post")Optional<Long> postNo,
+			@PathVariable("categoryNo")Optional<Long> categoryNo,
+			@PathVariable("postNo")Optional<Long> postNo,
 			Model model) {
 		Long category = 0L;
 		Long post = 0L;
-		if(postNo.isPresent() &&  postNo.getClass().isInstance(post)) {
+
+		if(postNo.isPresent()) {
 			//postNo 값이 들어왔고 postNo타입이 long이면
 			post = postNo.get();
 			category = categoryNo.get();
-		} else if(categoryNo.isPresent() && categoryNo.getClass().isInstance(category)) {
+		} else if(categoryNo.isPresent()) {
 			//categoryNo 값이 들어왔고 categoryNo 타입이 long이면
 			category = categoryNo.get();
 		}
-		Map<String, Object> map = blogService.getMainMap(id, category, post);
+		Map<String, Object> map = blogService.getMainBlog(id, category, post);
 		model.addAllAttributes(map);
+		
 		return "blog/main";
 	}
 	
@@ -102,8 +104,8 @@ public class BlogController {
 	@Auth
 	@RequestMapping("/admin/category/delete/{no}")
 	public String categoryDelete(@PathVariable("id") String id, @PathVariable("no")Long no) {
-		categoryService.delete(id, no);
 		postService.delete(no);
+		categoryService.delete(id, no);
 		
 		return "redirect:/{id}/admin/category";
 	}
@@ -120,7 +122,7 @@ public class BlogController {
 	@RequestMapping(value="/admin/write", method = RequestMethod.POST)
 	public String write(@PathVariable("id") String id, PostVo vo) {
 		postService.writePost(vo);
-//		model.addAttribute("category", vo.getCategoryNo());
+
 		return "redirect:/{id}/admin/category";
 	}
 	

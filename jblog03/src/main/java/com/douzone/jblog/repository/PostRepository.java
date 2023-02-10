@@ -22,10 +22,10 @@ public class PostRepository {
 	}
 
 	public List<PostVo> findByPostList(Long categoryNo) {
-		return sqlSession.selectList("post.findByCategoryNo", categoryNo);
+		return sqlSession.selectList("post.findByCategory", categoryNo);
 	}
 
 	public PostVo findByPostNo(Long postNo) {
-		return sqlSession.selectOne("post.findByPostNo", postNo);
+		return sqlSession.selectOne("post.findByPost", postNo);
 	}
 }

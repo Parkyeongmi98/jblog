@@ -35,29 +35,34 @@ public class BlogService {
 		blogRepository.update(vo);
 	}
 	
-	public Map<String, Object> getMainMap(String id, Long categoryNo, Long postNo) {
-		BlogVo blog = blogRepository.find(id);
-		Map<String, Object> result = new HashMap<>();
-		//카테고리 리스트
-		List<CategoryVo> categoryList =categoryRepository.findCategory(id);
-		//카테고리 선택 안하면 list 제일 앞 category에 해당하는 게시글 리스트
+	public Map<String, Object> getMainBlog(String id, Long categoryNo, Long postNo) {
+		BlogVo blog = blogRepository.find(id); // 유저에 맞는 블로그
+		Map<String, Object> map = new HashMap<>();
+		
+		// 카테고리 리스트 불러오기
+		List<CategoryVo> categoryList = categoryRepository.findCategory(id);
+		// 카테고리 선택 안하면 list 제일 앞 category에 해당하는 게시글 리스트
 		if(categoryNo == 0) {
 			categoryNo = categoryList.get(0).getNo();
 		}
+		
+		// 카테고리에 해당하는 게시글 리스트 불러오기
 		List<PostVo> postList = postRepository.findByPostList(categoryNo);
-		PostVo vo = null;
-		if(!postList.isEmpty()) {
-			//카테고리 게시글 중 제일 최근 작성된 게시글 찾기
-			vo = postList.get(0);			
+		PostVo postVo = null;
+		
+		if(!postList.isEmpty()) { // 게시글이 비어있지않으면
+			// 카테고리 게시글 중 제일 최근 작성된 게시글 찾기
+			postVo = postList.get(0);			
 		}
-		if(postNo != 0) {
-			//게시글 선택 시 보여줄 게시글 찾기
-			vo = postRepository.findByPostNo(postNo);
+		if(postNo != 0) { // 게시글번호가 0이 아니면
+			// 게시글번호에 맞는 게시글 찾기
+			postVo = postRepository.findByPostNo(postNo);
 		}
-		result.put("blogvo", blog);
-		result.put("category", categoryList);
-		result.put("postlist", postList);
-		result.put("post", vo);
-		return result;
+		map.put("blogvo", blog);
+		map.put("category", categoryList);
+		map.put("postlist", postList);
+		map.put("post", postVo);
+
+		return map;
 	}
 }

@@ -22,6 +22,8 @@
 						<h4>작성된 게시글이 없습니다.</h4>
 					</c:if>
 					<h4>${post.title }</h4>
+
+					<p>${map }</p>
 					<p>
 						${fn:replace(post.contents, newline, "<br>") }
 					<p>
