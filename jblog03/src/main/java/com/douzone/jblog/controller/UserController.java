@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.UserVo;
 
@@ -18,6 +20,10 @@ import com.douzone.jblog.vo.UserVo;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private BlogService blogService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join(@ModelAttribute UserVo vo) {
@@ -32,6 +38,9 @@ public class UserController {
 			return "user/join";
 		}
 		userService.joinUser(vo);
+		blogService.insertBlog(vo.getId());
+		categoryService.insertCategory(vo.getId());
+		
 		
 		return "redirect:/user/joinsuccess";
 	}

@@ -25,4 +25,8 @@ public class UserRepository {
 		
 		return sqlSession.selectOne("user.findByIdAndPassword", map);
 	}
+	
+	public String findById(String id) {
+		return sqlSession.selectOne(id);
+	}
 }

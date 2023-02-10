@@ -11,8 +11,12 @@ public class BlogRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public BlogVo find() {
-		return sqlSession.selectOne("blog.find");
+	public void insert(String id) {
+		sqlSession.insert("blog.insert", id);
+	}
+	
+	public BlogVo find(String id) {
+		return sqlSession.selectOne("blog.find", id);
 	}
 	
 	public void update(BlogVo vo) {

@@ -5,39 +5,33 @@
 	<insert id="insert" parameterType="postvo">
 		<![CDATA[
 		insert 
-			into user 
-			values(#{id }, #{name }, password(#{password }), now())
+			into post
+			values(null, #{title }, #{contents }, now(), #{categoryNo})
 		]]>
 	</insert>
 	
-	<!-- 
-	<update id="update" parameterType="uservo">
-		<choose>
-			<when test='password == ""'>
-				<![CDATA[
-				update user 
-					set name = #{name }, gender = #{gender } 
-					where no = #{no }
-				]]>
-			</when>
-			<otherwise>
-				<![CDATA[
-				update user 
-					set name = #{name }, password = password(#{password }), gender = #{gender } 
-					where no = #{no }
-				]]>
-			</otherwise>
-		</choose>
-	</update>
-	
-	-->
-
-	<select id="findAdminBasic" resultType="postvo" parameterType="map">
+	<delete id="delete" parameterType="long">
 		<![CDATA[
-		select id, name
-			from user 
-			where id = #{id } 
-			and password = password(#{password })
+		delete 
+			from post
+			where category_no = #{no }
+		]]>
+	</delete>
+	
+	<select id="findByCategoryNo" parameterType="long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, date_format(reg_date, '%Y-%m-%d') as regDate, category_no as categoryNo
+			from post
+			where category_no = #{categoryNo }
+			order by reg_date desc	
+		]]>
+	</select>
+	
+	<select id="findByPostNo" parameterType="long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, date_format(reg_date, '%Y-%m-%d') as regDate, category_no as categoryNo
+			from post
+			where no = #{postNo }
 		]]>
 	</select>
 </mapper>

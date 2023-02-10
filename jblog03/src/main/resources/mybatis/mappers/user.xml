@@ -10,27 +10,13 @@
 		]]>
 	</insert>
 	
-	<!-- 
-	<update id="update" parameterType="uservo">
-		<choose>
-			<when test='password == ""'>
-				<![CDATA[
-				update user 
-					set name = #{name }, gender = #{gender } 
-					where no = #{no }
-				]]>
-			</when>
-			<otherwise>
-				<![CDATA[
-				update user 
-					set name = #{name }, password = password(#{password }), gender = #{gender } 
-					where no = #{no }
-				]]>
-			</otherwise>
-		</choose>
-	</update>
-	
-	-->
+	<select id="findId" resultType="string" parameterType="string">
+		<![CDATA[
+		select id 
+			from user 
+			where id = #{id }
+		]]>
+	</select>
 
 	<select id="findByIdAndPassword" resultType="uservo" parameterType="map">
 		<![CDATA[

@@ -18,4 +18,8 @@ public class UserService {
 	public UserVo getUser(UserVo vo) {
 		return userRepository.findByIdAndPassword(vo.getId(), vo.getPassword());
 	}
+	
+	public void getUserId(String id) {
+		userRepository.findById(id);
+	}
 }

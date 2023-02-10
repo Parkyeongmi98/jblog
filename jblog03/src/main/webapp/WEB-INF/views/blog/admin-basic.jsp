@@ -15,7 +15,7 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<c:import url="/WEB-INF/views/includes/admin-menu.jsp" />
-				<form method="post" action="${pageContext.request.contextPath }/blog/${authUser.id }/admin/basic/update" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath }/${authUser.id }/admin/update" enctype="multipart/form-data">
 	 		      	<input type="hidden" name="profile" value="${blogVo.profile }" />
 	 		      	<table class="admin-config">
 			      		<tr>
@@ -33,7 +33,7 @@
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
 			      			<td class="s"><input type="submit" value="기본설정 변경"></td>      			
-			      		</tr>           		
+			      		</tr>     		
 			      	</table>
 				</form>
 			</div>
