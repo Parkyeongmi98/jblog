@@ -44,18 +44,18 @@ public class BlogController {
 			@PathVariable("categoryNo")Optional<Long> categoryNo,
 			@PathVariable("postNo")Optional<Long> postNo,
 			Model model) {
-		Long category = 0L;
-		Long post = 0L;
+		Long categoryNum = 0L;
+		Long postNum = 0L;
 
 		if(postNo.isPresent()) {
 			//postNo 값이 들어왔고 postNo타입이 long이면
-			post = postNo.get();
-			category = categoryNo.get();
+			postNum = postNo.get();
+			categoryNum = categoryNo.get();
 		} else if(categoryNo.isPresent()) {
 			//categoryNo 값이 들어왔고 categoryNo 타입이 long이면
-			category = categoryNo.get();
+			categoryNum = categoryNo.get();
 		}
-		Map<String, Object> map = blogService.getMainBlog(id, category, post);
+		Map<String, Object> map = blogService.getMainBlog(id, categoryNum, postNum);
 		model.addAllAttributes(map);
 		
 		return "blog/main";

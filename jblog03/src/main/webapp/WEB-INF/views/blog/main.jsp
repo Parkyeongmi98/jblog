@@ -18,18 +18,16 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<c:if test="${empty post }">
+					<c:if test="${empty postVo }">
 						<h4>작성된 게시글이 없습니다.</h4>
 					</c:if>
-					<h4>${post.title }</h4>
-
-					<p>${map }</p>
+					<h4>${postVo.title }</h4>
 					<p>
-						${fn:replace(post.contents, newline, "<br>") }
+						${fn:replace(postVo.contents, newline, "<br>") }
 					<p>
 				</div>
 				<ul class="blog-list">
-					<c:forEach items="${postlist }" var="vo">
+					<c:forEach items="${postList }" var="vo">
 						<li><a href="${pageContext.request.contextPath}/${blogvo.id }/${vo.categoryNo }/${vo.no }">${vo.title }</a> <span>${vo.regDate }</span>	</li>
 					</c:forEach>
 				</ul>
@@ -45,7 +43,7 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<c:forEach items="${category }" var="vo">
+				<c:forEach items="${categoryList }" var="vo">
 					<li><a href="${pageContext.request.contextPath}/${blogvo.id }/${vo.no }">${vo.name }</a></li>
 				</c:forEach>
 			</ul>

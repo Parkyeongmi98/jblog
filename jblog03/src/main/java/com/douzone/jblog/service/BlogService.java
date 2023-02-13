@@ -48,20 +48,20 @@ public class BlogService {
 		
 		// 카테고리에 해당하는 게시글 리스트 불러오기
 		List<PostVo> postList = postRepository.findByPostList(categoryNo);
-		PostVo postVo = null;
 		
+		PostVo postVo = null;
 		if(!postList.isEmpty()) { // 게시글이 비어있지않으면
 			// 카테고리 게시글 중 제일 최근 작성된 게시글 찾기
 			postVo = postList.get(0);			
 		}
 		if(postNo != 0) { // 게시글번호가 0이 아니면
 			// 게시글번호에 맞는 게시글 찾기
-			postVo = postRepository.findByPostNo(postNo);
+			postVo = postRepository.findByPost(postNo);
 		}
 		map.put("blogvo", blog);
-		map.put("category", categoryList);
-		map.put("postlist", postList);
-		map.put("post", postVo);
+		map.put("categoryList", categoryList);
+		map.put("postList", postList);
+		map.put("postVo", postVo);
 
 		return map;
 	}
