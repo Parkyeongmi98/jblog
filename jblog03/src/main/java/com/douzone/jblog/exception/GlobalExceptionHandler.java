@@ -1,4 +1,4 @@
-package com.douzone.mysite.exception;
+package com.douzone.jblog.exception;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

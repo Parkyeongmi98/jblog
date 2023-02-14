@@ -1,4 +1,4 @@
-package com.douzone.mysite.exception;
+package com.douzone.jblog.exception;
 
 public class UserRepositoryException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
