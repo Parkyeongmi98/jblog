@@ -14,7 +14,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	private static final Log logger = LogFactory.getLog(GlobalExceptionHandler.class); // error코드 Log처리
-	
+			
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handlerException(Exception e) {
 		// 1. 404 Error 처리
@@ -34,6 +34,7 @@ public class GlobalExceptionHandler {
 					
 			return mav;
 		}
+		
 		// 2. 로깅(Logging)
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
